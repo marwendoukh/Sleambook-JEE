@@ -31,6 +31,7 @@ public class loginMB {
 	
 	@PostConstruct
 	public void init(){
+		//
 		
 		System.out.print("hello from jsp");
 		
@@ -40,7 +41,8 @@ public class loginMB {
 	
 public Boolean doLogin() {
  		
-	msg="okkkkkkkkkkkk";
+	msg="ok g!";
+	
 	/*try {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("http://www.myUrl.com");
 	} catch (IOException e) {
