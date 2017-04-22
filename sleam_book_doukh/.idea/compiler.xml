@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sleam_book_doukh-client" />
+        <module name="sleam_book_doukh-ear" />
+        <module name="sleam_book_doukh-ejb" />
+        <module name="sleam_book_doukh-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sleam_book_doukh" target="1.8" />
+      <module name="sleam_book_doukh-client" target="1.8" />
+      <module name="sleam_book_doukh-ear" target="1.8" />
+      <module name="sleam_book_doukh-ejb" target="1.8" />
+      <module name="sleam_book_doukh-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

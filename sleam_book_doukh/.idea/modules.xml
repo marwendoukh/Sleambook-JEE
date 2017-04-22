@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sleam_book_doukh-client/src/main/main.iml" filepath="$PROJECT_DIR$/sleam_book_doukh-client/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sleam_book_doukh-ejb/src/main/main1.iml" filepath="$PROJECT_DIR$/sleam_book_doukh-ejb/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sleam_book_doukh.iml" filepath="$PROJECT_DIR$/sleam_book_doukh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sleam_book_doukh-client/sleam_book_doukh-client.iml" filepath="$PROJECT_DIR$/sleam_book_doukh-client/sleam_book_doukh-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sleam_book_doukh-ear/sleam_book_doukh-ear.iml" filepath="$PROJECT_DIR$/sleam_book_doukh-ear/sleam_book_doukh-ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sleam_book_doukh-ejb/sleam_book_doukh-ejb.iml" filepath="$PROJECT_DIR$/sleam_book_doukh-ejb/sleam_book_doukh-ejb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sleam_book_doukh-web/sleam_book_doukh-web.iml" filepath="$PROJECT_DIR$/sleam_book_doukh-web/sleam_book_doukh-web.iml" />
+    </modules>
+  </component>
+</project>
