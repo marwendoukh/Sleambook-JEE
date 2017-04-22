@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrought"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+
+
+</head>
+
+<body>
+
+<!-- Say Hi to user -->
+
+<p align="right">Hello again #{homeMB.myName} !</p>
+
+<!-- add publication -->
+	<div align="center">
+	<h:form>
+		<h:panelGrid columns="1">
+	
+		<h:outputText value="post to your timeline" />
+		<h:inputText  value="#{homeMB.publicationContent}" styleClass="input" />
+		</h:panelGrid>
+		
+		<h:commandButton  action="#{homeMB.addPublication()}" value="post" styleClass="button" />
+			
+</h:form>
+</div>
+
+<br/><br/><br/>
+
+<div align="center">
+<h:dataTable value="#{homeMB.publications}" var="publication" cellspacing="10">
+  <h:column >
+
+    
+    <h:outputText  value="#{publication.owner.name}" />
+        <h:outputText   value=" posted :" />
+    <br/>
+    
+        <h:outputText value="#{publication.title}" />
+            </h:column>
+        
+</h:dataTable>
+</div>
+
+</body>
+</html>

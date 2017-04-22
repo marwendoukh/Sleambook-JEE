@@ -6,8 +6,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
 import entities.Comment;
 import entities.GroupOfSleamBooker;
 import entities.Message;
@@ -61,18 +59,16 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 	}
 
 	@Override
-	public void createPublicationByUser(Integer idUser, Publication publication) {
-		User owner = findUserById(idUser);
+	public void createPublicationByUser(User user, Publication publication) {
 
-		publication.setOwner(owner);
+		publication.setOwner(user);
 
 		entityManager.merge(publication);
 
 	}
 
 	@Override
-	public void assignPublicationToUser(Publication publication, Integer idUser) {
-		User user = findUserById(idUser);
+	public void assignPublicationToUser(Publication publication, User user) {
 
 		List<Publication> publicationsOld = user.getPublications();
 		publicationsOld.add(publication);
@@ -84,20 +80,23 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 	}
 
 	@Override
-	public List<Publication> findPublicationsByUser(Integer idUser) {
-		return entityManager.createQuery("SELECT p FROM Publication p WHERE p.owner.id=:param", Publication.class)
-				.setParameter("param", idUser).getResultList();
+	public List<Publication> findPublicationsByUser(User user) {
+		return entityManager.createQuery("FROM Publication p WHERE p.owner=:param", Publication.class)
+				.setParameter("param", user).getResultList();
 	}
 
+	
+	
+	
+	
 	@Override
-	public List<Publication> findPublicationsByFriends(Integer idUser) {
-		User user = findUserById(idUser);
+	public List<Publication> findPublicationsByFriends(User user) {
 
-		List<User> friends = user.getFriends();
-
+		List<User> friends =  this.getFriendsByUser(user);
+		
 		List<Publication> publications = new ArrayList<>();
 		for (User f : friends) {
-			List<Publication> publicationsByFriend = findPublicationsByUser(f.getId());
+			List<Publication> publicationsByFriend = findPublicationsByUser(f);
 			for (Publication p : publicationsByFriend) {
 				publications.add(p);
 			}
@@ -126,14 +125,14 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 	public void commentPublication(User user, Publication publication, String comment) {
 		Comment commenT = new Comment(comment, user, publication);
 		entityManager.persist(commenT);
-			
+
 	}
 
 	@Override
 	public void reviewPublication(User user, Publication publication, ReviewType reviewType) {
 		Review review = new Review(reviewType, user, publication);
 		entityManager.persist(review);
-			
+
 	}
 
 	@Override
@@ -144,17 +143,36 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 
 	@Override
 	public void sharePublication(User user, Publication publication) {
-		//user.getPublicationsShared().add(publication);
+		// user.getPublicationsShared().add(publication);
 		publication.getUsersThatSharedThis().add(user);
 		entityManager.merge(publication);
-
 
 	}
 
 	@Override
 	public User login(String username, String password) {
-		return entityManager.createQuery("SELECT u FROM User WHERE u.username=:u AND u.password=:p", User.class)
-				.setParameter("u", username).setParameter("p", password).getSingleResult();
+		
+		try {
+			
+			return entityManager.createQuery("FROM User WHERE username=:u AND password=:p", User.class)
+					.setParameter("u", username).setParameter("p", password).getSingleResult();
+			
+		} 
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+
+	@Override
+	public List<User> getFriendsByUser(User u) {
+
+		
+		u=entityManager.createQuery("SELECT u FROM User u JOIN FETCH u.friends WHERE u = :param", User.class).setParameter("param", u).getSingleResult();
+
+		return u.getFriends();
+			
+	
 	}
 
 }

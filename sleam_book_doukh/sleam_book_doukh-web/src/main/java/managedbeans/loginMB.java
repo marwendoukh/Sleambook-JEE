@@ -1,19 +1,12 @@
-import java.io.Console;
-import java.io.IOException;
-import java.util.logging.Logger;
-
-import javax.annotation.PostConstruct;
+package managedbeans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 
 import entities.User;
 import services.userManagement.UserManagementLocal;
 
-
-@RequestScoped
+@ViewScoped
 @ManagedBean
 public class loginMB {
 	
@@ -24,54 +17,41 @@ public class loginMB {
 
 	private String username="";
 	private String password="";
-	
-	
+	private String name="";
 	private String msg="";
 	
 	
-	@PostConstruct
-	public void init(){
-		//
+	
+public String doLogin() {
+	
 		
-		System.out.print("hello from jsp");
-		
-}
+	User userLoggedIn;
 	
+		 userLoggedIn = userManagement.login(username, password);
 	
-	
-public Boolean doLogin() {
- 		
-	msg="ok g!";
-	
-	/*try {
-		FacesContext.getCurrentInstance().getExternalContext().redirect("http://www.myUrl.com");
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}*/
-	
-	System.out.println("doing login");
+		 if(userLoggedIn==null)
+		msg="username or password incorrect";
+		 else
+			 ConnectedUser.setU(userLoggedIn);
+		 
 
-	//	userManagement.login(username, password);*/
 			
-		return true;
+		return "/home?faces-redirect=true";
 }
 	
 
-public String doSignUp(){
+public void doSignUp(){
 	
 
-	user.setUsername("user");
-	user.setPassword("pw");
-	user.setName("ssd");
-	Console console = System.console();
-	 console.printf("sign up ...");
+	user.setUsername(username);
+	user.setPassword(password);
+	user.setName(name);
+	
 	  System.out.println("sign up ...");
 	System.out.println(user.getPassword());
 	System.out.println(user.getUsername());
 
 	userManagement.addUser(user);
-	return "";
 		
 }
 
@@ -125,6 +105,18 @@ public User getUser() {
 
 public void setUser(User user) {
 	this.user = user;
+}
+
+
+
+public String getName() {
+	return name;
+}
+
+
+
+public void setName(String name) {
+	this.name = name;
 }
 
 	

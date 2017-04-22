@@ -21,13 +21,13 @@ public interface UserManagementRemote {
 
 	void deleteUser(User user);
 
-	void createPublicationByUser(Integer idUser, Publication publication);
+	void createPublicationByUser(User user, Publication publication);
 
-	void assignPublicationToUser(Publication publication, Integer idUser);
+	void assignPublicationToUser(Publication publication, User user);
 
-	List<Publication> findPublicationsByUser(Integer idUser);
+	List<Publication> findPublicationsByUser(User user);
 
-	List<Publication> findPublicationsByFriends(Integer idUser);
+	List<Publication> findPublicationsByFriends(User user);
 
 	void addFriend(User me, User friend);
 
@@ -44,5 +44,8 @@ public interface UserManagementRemote {
 	void sharePublication(User user, Publication publication);
 
 	User login(String username, String password);
+	
+	List<User> getFriendsByUser(User u);
+
 
 }

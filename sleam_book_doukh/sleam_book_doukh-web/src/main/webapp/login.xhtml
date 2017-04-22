@@ -1,42 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://xmlns.jcp.org/jsf/core"
-	  xmlns:jsf="http://xmlns.jcp.org/jsf"
-	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrought"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrought"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
 <head>
 
 
 </head>
 
 <body>
-<p>ha</p>
+	<h1 align="center">Welcome to Sleambook </h1>
+	
+				<font color="RED"><h:outputText align="center" value="#{loginMB.msg}" /></font>
+	
+	<!-- Sign in -->
+	<div align="center">
+	<h:form>
+		<h:panelGrid columns="4">
+	
+		<h:outputText value="username" />
+		<h:inputText value="#{loginMB.username}" styleClass="input" />
+		<h:outputText value="password" />
+		<h:inputSecret value="#{loginMB.password}" styleClass="input" />
+		</h:panelGrid>
+		
+		<h:commandButton  action="#{loginMB.doLogin()}" value="Sign in" styleClass="button" />
+			
+</h:form>
+</div>
+
+		
+			<h2></h2>
+<!-- Sign up -->
+<div>
 <h:form>
-	<h:outputText value="login" />
-	<h:inputText value="#{loginMB.username}" styleClass="input"/>
-		<h:outputText value="password" />
-			<h:inputSecret value="#{loginMB.password}" styleClass="input"/>
-			
-				<h:commandButton action="#{loginMB.doLogin()}" value="llllLogin" styleClass="button" />
-				
-				<h2>
-				</h2>
-				
-				<h:outputText value="sign up" />
-	<h:inputText value="#{loginMB.username}" styleClass="input"/>
-		<h:outputText value="password" />
-			<h:inputSecret value="#{loginMB.password}" styleClass="input"/>
-			
-			
-			<h:outputText value="#{loginMB.printBonjou()}" />
-			
-				<h:commandButton action="#{loginMB.doSignUp()}"  value="Sign up" styleClass="button" />
-				
-				</h:form>
-				
-				
-</body>      
-      
-      
-      </html>
+			<h:outputText value="sign up" />
+			<h:inputText value="#{loginMB.username}" styleClass="input" />
+			<h:inputText value="#{loginMB.name}" styleClass="input" />
+
+			<h:outputText value="password" />
+			<h:inputSecret value="#{loginMB.password}" styleClass="input" />
+
+
+
+			<h:commandButton action="#{loginMB.doSignUp()}" value="Sign up"
+				styleClass="button" />
+
+	</h:form>
+		</div>
+
+</body>
+</html>
