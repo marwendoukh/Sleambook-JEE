@@ -4,14 +4,18 @@ import entities.User;
 
 public class ConnectedUser {
 	
-	static User u ;
+	static User user ;
 
-	public static User getU() {
-		return u;
+	public static User getUser() {
+		return user;
 	}
 
-	public static void setU(User u) {
-		ConnectedUser.u = u;
+	public static void setUser(User u) {
+		ConnectedUser.user = u;
+	}
+	
+	public static void logOut() {
+		ConnectedUser.user = null;
 	}
 	
 	

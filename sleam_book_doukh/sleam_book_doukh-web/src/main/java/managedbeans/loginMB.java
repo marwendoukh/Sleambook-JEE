@@ -30,9 +30,9 @@ public String doLogin() {
 		 userLoggedIn = userManagement.login(username, password);
 	
 		 if(userLoggedIn==null)
-		msg="username or password incorrect";
+			 msg="username or password incorrect";
 		 else
-			 ConnectedUser.setU(userLoggedIn);
+			 ConnectedUser.setUser(userLoggedIn);
 		 
 
 			

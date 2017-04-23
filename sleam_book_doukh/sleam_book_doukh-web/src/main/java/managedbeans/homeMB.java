@@ -39,12 +39,19 @@ public class homeMB {
 	@PostConstruct
 	public void fetchPublications() throws IOException
 	{
-		if(ConnectedUser.getU()==null)
+		if(ConnectedUser.getUser()==null)
 			FacesContext.getCurrentInstance().getExternalContext().redirect("login.jsf");
-		User u = userManagement.findUserById(ConnectedUser.getU().getId());
+		User u = userManagement.findUserById(ConnectedUser.getUser().getId());
 		publications.addAll(userManagement.findPublicationsByUser(u));
 		publications.addAll(userManagement.findPublicationsByFriends(u));
 		myName=u.getName();
+	}
+	
+	public String logOut()
+	{
+		ConnectedUser.logOut();
+		return "/login?faces-redirect=true";
+
 	}
 	
 

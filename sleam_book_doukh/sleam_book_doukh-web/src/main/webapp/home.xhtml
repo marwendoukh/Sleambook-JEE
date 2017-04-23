@@ -12,9 +12,17 @@
 
 <body>
 
-<!-- Say Hi to user -->
 
+<div align="right">
+
+<!-- Say Hi to user -->
 <p align="right">Hello again #{homeMB.myName} !</p>
+
+<!--  log out -->
+<h:form >
+		<h:commandButton action="#{homeMB.logOut()}" value="Log out" styleClass="button" />
+</h:form>
+</div>
 
 <!-- add publication -->
 	<div align="center">

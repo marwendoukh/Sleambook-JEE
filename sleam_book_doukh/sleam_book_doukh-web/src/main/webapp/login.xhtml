@@ -6,14 +6,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html">
 <head>
-
+<title>Sleambook</title>
 
 </head>
 
 <body>
 	<h1 align="center">Welcome to Sleambook </h1>
 	
-				<font color="RED"><h:outputText align="center" value="#{loginMB.msg}" /></font>
+				<p><font color="RED"><h:outputText align="center" value="#{loginMB.msg}" /></font></p>
 	
 	<!-- Sign in -->
 	<div align="center">
@@ -31,19 +31,19 @@
 </h:form>
 </div>
 
+	
+	<!-- Sign up -->
 		
-			<h2></h2>
-<!-- Sign up -->
+			<h2>Not a Sleambook user yet ?</h2>
+			<p>Get your free account now !</p>
 <div>
 <h:form>
-			<h:outputText value="sign up" />
-			<h:inputText value="#{loginMB.username}" styleClass="input" />
+			<h:outputText value="your name" />
 			<h:inputText value="#{loginMB.name}" styleClass="input" />
-
+			<h:outputText value="username" />
+			<h:inputText value="#{loginMB.username}" styleClass="input" />
 			<h:outputText value="password" />
 			<h:inputSecret value="#{loginMB.password}" styleClass="input" />
-
-
 
 			<h:commandButton action="#{loginMB.doSignUp()}" value="Sign up"
 				styleClass="button" />
