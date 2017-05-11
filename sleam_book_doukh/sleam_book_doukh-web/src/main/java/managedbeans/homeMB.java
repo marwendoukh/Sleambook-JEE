@@ -6,14 +6,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import entities.Publication;
 import entities.User;
 import services.userManagement.UserManagementLocal;
 
 @ManagedBean
+@SessionScoped
 public class homeMB {
+	
 	
 	private String publicationContent;
 	private List<Publication> publications=new ArrayList<>();
@@ -49,9 +53,21 @@ public class homeMB {
 	
 	public String logOut()
 	{
-		ConnectedUser.logOut();
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+	            .getExternalContext().getSession(false);
+	    session.invalidate();
+	
+		//ConnectedUser.logOut();
 		return "/login?faces-redirect=true";
 
+	}
+	
+	
+	public void shareThisPublication() {
+		// TODO Auto-generated method stub
+		
+			userManagement.sharePublication(ConnectedUser.getUser(), publications.get(2));
+			
 	}
 	
 

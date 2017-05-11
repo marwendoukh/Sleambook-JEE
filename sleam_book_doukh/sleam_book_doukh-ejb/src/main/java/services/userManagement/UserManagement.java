@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import entities.Comment;
 import entities.GroupOfSleamBooker;
 import entities.Message;
@@ -85,15 +86,11 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 				.setParameter("param", user).getResultList();
 	}
 
-	
-	
-	
-	
 	@Override
 	public List<Publication> findPublicationsByFriends(User user) {
 
-		List<User> friends =  this.getFriendsByUser(user);
-		
+		List<User> friends = this.getFriendsByUser(user);
+
 		List<Publication> publications = new ArrayList<>();
 		for (User f : friends) {
 			List<Publication> publicationsByFriend = findPublicationsByUser(f);
@@ -144,22 +141,22 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 	@Override
 	public void sharePublication(User user, Publication publication) {
 		// user.getPublicationsShared().add(publication);
-		publication.getUsersThatSharedThis().add(user);
+		List<User> usersSharedThis = fetchUsersThatSharedThis(publication);
+		usersSharedThis.add(user);
+		publication.setUsersThatSharedThis(usersSharedThis);
 		entityManager.merge(publication);
 
 	}
 
 	@Override
 	public User login(String username, String password) {
-		
+
 		try {
-			
+
 			return entityManager.createQuery("FROM User WHERE username=:u AND password=:p", User.class)
 					.setParameter("u", username).setParameter("p", password).getSingleResult();
-			
-		} 
-		catch (Exception e)
-		{
+
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -167,12 +164,22 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 	@Override
 	public List<User> getFriendsByUser(User u) {
 
-		
-		u=entityManager.createQuery("SELECT u FROM User u JOIN FETCH u.friends WHERE u = :param", User.class).setParameter("param", u).getSingleResult();
+		return entityManager.createQuery("SELECT u FROM User u INNER JOIN u.friends ufs WHERE ufs=:p", User.class).setParameter("p", u).getResultList();
 
-		return u.getFriends();
 			
 	
+	}
+
+	@Override
+	public List<User> fetchUsersThatSharedThis(Publication p) {
+		try{
+		p= entityManager.createQuery("SELECT  p FROM Publication p JOIN FETCH p.usersThatSharedThis WHERE p = :param", Publication.class).setParameter("param", p).getSingleResult();
+		}
+		catch (Exception e) {
+			return new ArrayList<User>();
+		}
+		return p.getUsersThatSharedThis();
+
 	}
 
 }

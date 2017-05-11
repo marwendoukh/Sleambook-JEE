@@ -46,6 +46,7 @@ public interface UserManagementRemote {
 	User login(String username, String password);
 	
 	List<User> getFriendsByUser(User u);
+	List<User> fetchUsersThatSharedThis(Publication p);
 
 
 }

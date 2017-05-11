@@ -1,12 +1,12 @@
 package managedbeans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import entities.User;
 import services.userManagement.UserManagementLocal;
 
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class loginMB {
 	
@@ -20,12 +20,12 @@ public class loginMB {
 	private String name="";
 	private String msg="";
 	
-	
+	private User userLoggedIn;
+
 	
 public String doLogin() {
 	
 		
-	User userLoggedIn;
 	
 		 userLoggedIn = userManagement.login(username, password);
 	
@@ -117,6 +117,16 @@ public String getName() {
 
 public void setName(String name) {
 	this.name = name;
+}
+
+
+public User getUserLoggedIn() {
+	return userLoggedIn;
+}
+
+
+public void setUserLoggedIn(User userLoggedIn) {
+	this.userLoggedIn = userLoggedIn;
 }
 
 	
